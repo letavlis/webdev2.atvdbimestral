@@ -19,7 +19,6 @@
                     <tr>
                         <td class="d-none d-md-table-cell">{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
-                        <td class="d-none d-md-table-cell">{{ $item->descricao }}</td>
                         <td>
                             <a href= "{{ route('eixos.edit', $item->id) }}" class="btn btn-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFF" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">

@@ -60,7 +60,7 @@
                             <span class="ps-1 text-white">IFPR</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Áreas e Eixos</a></li>
+                            <li><a href="{{route('eixos.index')}}" class="dropdown-item">Áreas e Eixos</a></li>
                             <li><a href="#" class="dropdown-item">Niveis de Formação</a></li>
                             <li><a href="#" class="dropdown-item">Cursos</a></li>
                             <li><a href="#" class="dropdown-item">Disciplinas</a></li>
