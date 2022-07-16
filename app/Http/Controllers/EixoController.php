@@ -14,25 +14,29 @@ class EixoController extends Controller
         return view('eixos.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+   
+    public function create(){
+        return view('eixos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    
+    public function store(Request $request){
+        $regras =[
+            'nome' => 'required|max:50|min:10',
+        ];
+
+        $msgs =[
+            "required" => "O preenchimento do campo [:attribute] é obrigatório!",
+            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+            "min" => "O campo [:attribute] possui tamanho mínimo de [:min] caracteres!",
+        ];
+        $request->validate($regras, $msgs);
+
+        Eixo::create([
+            'nome' => mb_strtoupper($request->nome, 'UTF-8')
+        ]);
+
+        return redirect()->route('eixos.index');
     }
 
     /**
