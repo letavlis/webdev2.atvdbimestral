@@ -13,7 +13,7 @@ class Eixo extends Migration
      */
     public function up()
     {
-        Schema::create('eixo', function (Blueprint $table) {
+        Schema::create('eixos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->softDeletes();
@@ -28,6 +28,6 @@ class Eixo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eixo');
+        Schema::dropIfExists('eixos');
     }
 }
