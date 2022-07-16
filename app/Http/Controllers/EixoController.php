@@ -77,14 +77,12 @@ class EixoController extends Controller
         return redirect()->route('eixos.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        $obj = Eixo::find($id);
+        if(!isset($data)){return"<h1>ID: $id não encontrado!</h1>";}
+
+        $obj->delete();
+
+        return redirect()->route('eixos.index');
     }
 }
