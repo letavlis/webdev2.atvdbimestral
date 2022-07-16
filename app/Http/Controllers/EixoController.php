@@ -79,7 +79,8 @@ class EixoController extends Controller
 
     public function destroy($id){
         $obj = Eixo::find($id);
-        if(!isset($data)){return"<h1>ID: $id não encontrado!</h1>";}
+
+        if(!isset($obj)){return"<h1>ID: $id não encontrado!</h1>";}
 
         $obj->delete();
 
