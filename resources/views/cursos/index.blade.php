@@ -20,8 +20,12 @@
                     <tr>
                         <td class="d-none d-md-table-cell">{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
-                        <td class="d-none d-md-table-cell">{{ $item->abreviatura }}</td>
-                        <td class="d-none d-md-table-cell">{{ $item->eixoArea->nome }}</td>
+                        <td class="d-none d-md-table-cell">{{ $item->sigla }}</td>
+                        @foreach($eixo as $key)
+                            @if($key->id == $item->eixo_id)
+                            <td class="d-none d-md-table-cell">{{ $key->nome }}</td>
+                            @endif
+                        @endforeach
                         <td>
                             <a href= "{{ route('cursos.edit', $item->id) }}" class="btn btn-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFF" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">

@@ -28,34 +28,15 @@
             <div class="form-floating mb-3">
                 <input 
                     type="text" 
-                    class="form-control @if($errors->has('abreviatura')) is-invalid @endif" 
-                    name="abreviatura" 
-                    placeholder="Abreviatura"
-                    value="{{old('abreviatura')}}"
+                    class="form-control @if($errors->has('sigla')) is-invalid @endif" 
+                    name="sigla" 
+                    placeholder="Sigla"
+                    value="{{old('sigla')}}"
                 />
                 <label for="nome">Abreviatura</label>
-                @if($errors->has('abreviatura'))
+                @if($errors->has('sigla'))
                     <div class='invalid-feedback'>
-                        {{ $errors->first('abreviatura') }}
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="form-floating mb-3">
-                <textarea
-                    type="text"
-                    class="form-control @if($errors->has('descricao')) is-invalid @endif"
-                    name="descricao"
-                    placeholder="Descrição"
-                    style="min-height: 100px"
-                >{{old('descicao')}}</textarea>
-                <label for="descricao">Descrição do Curso</label>
-                @if($errors->has('descricao'))
-                    <div class='invalid-feedback'>
-                        {{ $errors->first('descricao') }}
+                        {{ $errors->first('sigla') }}
                     </div>
                 @endif
             </div>
@@ -85,44 +66,17 @@
             <div class="input-group mb-3">
                 <span class="input-group-text bg-success text-white">Área/Eixo</span>
                 <select 
-                    name="eixo"
+                    name="eixos"
                     class="form-select"
-                    class="form-control @if($errors->has('eixo')) is-invalid @endif" 
+                    required
                 >
+                    <option selected="true" disabled="false"></option>
                     @foreach ($eixos as $item)
-                        <option value="{{$item->id}}" @if($item->id == old('eixo')) selected="true" @endif>
+                        <option value="{{$item->id}}">
                             {{ $item->nome }}
                         </option>
                     @endforeach
                 </select>
-                @if($errors->has('eixo'))
-                    <div class='invalid-feedback'>
-                        {{ $errors->first('eixo') }}
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col" >
-            <div class="input-group mb-3">
-                <span class="input-group-text bg-success text-white">Nível</span>
-                <select 
-                    name="nivel"
-                    class="form-select"
-                    class="form-control @if($errors->has('nivel')) is-invalid @endif" 
-                >
-                    @foreach ($niveis as $item)
-                        <option value="{{$item->id}}" @if($item->id == old('nivel')) selected="true" @endif>
-                            {{ $item->nome }}
-                        </option>
-                    @endforeach
-                </select>
-                @if($errors->has('nivel'))
-                    <div class='invalid-feedback'>
-                        {{ $errors->first('nivel') }}
-                    </div>
-                @endif
             </div>
         </div>
     </div>
