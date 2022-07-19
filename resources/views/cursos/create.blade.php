@@ -72,7 +72,7 @@
                 >
                     <option selected="true" disabled="false"></option>
                     @foreach ($eixos as $item)
-                        <option value="{{$item->id}}">
+                        <option value="{{$item->id}}" >
                             {{ $item->nome }}
                         </option>
                     @endforeach
