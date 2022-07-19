@@ -16,8 +16,8 @@ class Disciplina extends Migration
         Schema::create('disciplinas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->unsignedBigInteger('curso_id')
-                ->references('id')->on('cursos');
+            $table->unsignedBigInteger('curso_id');
+            $table->foreign('curso_id')->references('id')->on('cursos');
             $table->integer('carga');
             $table->softDeletes();
             $table->timestamps();
