@@ -60,37 +60,46 @@ class CursoController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    
+    public function edit($id){
+        $data = Curso::find($id);
+        $eixos = Eixo::all();
+        if(!isset($data)){return"<h1>ID: $id não encontrado!</h1>";}
+        return view('cursos.edit', compact('data', 'eixos'));
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
+        $regras =[
+            'nome' => 'required|max:50|min:10',
+            'tempo' => 'required|max:2|min:1|',
+        ];
+
+        $msgs =[
+            "required" => "O preenchimento do campo [:attribute] é obrigatório!",
+            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+            "min" => "O campo [:attribute] possui tamanho mínimo de [:min] caracteres!",
+            "unique" => "Já existe um veterinario cadastrado com esse [:attribute]!"
+        ];
+        
+        $request->validate($regras, $msgs);
+
+        $obj = Curso::find($id);
+        if(!isset($obj)){return"<h1>ID: $id não encontrado!</h1>";}
+        $obj -> fill([
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
+            'tempo' => $request->tempo,
+            'eixo_id' => $request->eixos
+        ]);
+        $obj -> save();
+        return redirect()->route('cursos.index');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        $obj = Curso::find($id);
+        if(!isset($obj)){return"<h1>ID: $id não encontrado!</h1>";}
+        $obj -> delete();
+        return redirect()->route('cursos.index');
     }
 }

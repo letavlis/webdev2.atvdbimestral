@@ -25,25 +25,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
-            <div class="form-floating mb-3">
-                <textarea
-                    type="text"
-                    class="form-control @if($errors->has('descricao')) is-invalid @endif"
-                    name="descricao"
-                    placeholder="Descrição"
-                    style="min-height: 100px"
-                >{{$data->descricao}}</textarea>
-                <label for="descricao">Descrição do Curso</label>
-                @if($errors->has('descricao'))
-                    <div class='invalid-feedback'>
-                        {{ $errors->first('descricao') }}
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col" >
             <div class="form-floating mb-3">
                 <input 
@@ -67,12 +48,12 @@
             <div class="input-group mb-3">
                 <span class="input-group-text bg-success text-white">Área/Eixo</span>
                 <select 
-                    name="eixo"
+                    name="eixos"
                     class="form-select"
-                    class="form-control @if($errors->has('eixo')) is-invalid @endif" 
-                >
+                    class="form-control @if($errors->has('eixo')) is-invalid @endif"
+                    >
                     @foreach ($eixos as $item)
-                        <option value="{{$item->id}}" @if($item->id == $data->eixo_area_id) selected="true" @endif>
+                        <option value="{{$item->id}}" @if($item->id == $data->eixo_id) selected="true" @endif>
                             {{ $item->nome }}
                         </option>
                     @endforeach
@@ -80,29 +61,6 @@
                 @if($errors->has('eixo'))
                     <div class='invalid-feedback'>
                         {{ $errors->first('eixo') }}
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col" >
-            <div class="input-group mb-3">
-                <span class="input-group-text bg-success text-white">Nível</span>
-                <select 
-                    name="nivel"
-                    class="form-select"
-                    class="form-control @if($errors->has('nivel')) is-invalid @endif" 
-                >
-                    @foreach ($niveis as $item)
-                        <option value="{{$item->id}}" @if($item->id == $data->nivel_id) selected="true" @endif>
-                            {{ $item->nome }}
-                        </option>
-                    @endforeach
-                </select>
-                @if($errors->has('nivel'))
-                    <div class='invalid-feedback'>
-                        {{ $errors->first('nivel') }}
                     </div>
                 @endif
             </div>

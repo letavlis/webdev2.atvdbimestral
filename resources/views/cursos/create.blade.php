@@ -68,7 +68,6 @@
                 <select 
                     name="eixos"
                     class="form-select"
-                    required
                 >
                     <option selected="true" disabled="false"></option>
                     @foreach ($eixos as $item)
