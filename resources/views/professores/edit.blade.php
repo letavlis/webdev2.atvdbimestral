@@ -1,12 +1,13 @@
 <!-- Herda o layout padrão definido no template "main" -->
-@extends('templates.main', ['titulo' => "Novo Professor"])
+@extends('templates.main', ['titulo' => "Alterar Professor"])
 <!-- Preenche o conteúdo da seção "titulo" -->
 @section('titulo') Professores @endsection
 <!-- Preenche o conteúdo da seção "conteudo" -->
 @section('conteudo')
 
-    <form action="{{ route('professores.store') }}" method="POST">
+    <form action="{{ route('professores.update', $data->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="row">
             <div class="col" >
                 <div class="form-floating mb-3">
@@ -15,7 +16,7 @@
                         class="form-control {{$errors -> has('nome') ? 'is-invalid' : ''}}" 
                         name="nome" 
                         placeholder="nome"
-                        value="{{old('nome')}}"
+                        value="{{$data->nome}}"
                     />
                     @if($errors -> has('nome'))
                         <div class='invalid-feedback'>
@@ -30,11 +31,11 @@
             <div class="col" >
                 <div class="form-floating mb-3">
                     <input 
-                        type="text" 
+                    type="text" 
                         class="form-control {{$errors -> has('email') ? 'is-invalid' : ''}}" 
                         name="email" 
-                        placeholder="email"
-                        value="{{old('email')}}"
+                        placeholder="E-mail"
+                        value="{{$data->email}}"
                     />
                     @if($errors -> has('email'))
                         <div class='invalid-feedback'>
@@ -47,56 +48,24 @@
         </div>
         <div class="row">
             <div class="col" >
-                <div class="form-floating mb-3">
-                    <input 
-                        type="text" 
-                        class="form-control {{$errors -> has('siape') ? 'is-invalid' : ''}}" 
-                        name="siape" 
-                        placeholder="siape"
-                        value="{{old('siape')}}"
-                    />
-                    @if($errors -> has('siape'))
-                        <div class='invalid-feedback'>
-                            {{ $errors->first('siape') }}
-                        </div>
-                    @endif
-                    <label for="siape">Siape</label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col" >
                 <div class="input-group mb-3">
                     <span class="input-group-text bg-success text-white">Área/Eixo</span>
                     <select 
                         name="eixos"
                         class="form-select"
-                        required
-                    >
+                        class="form-control @if($errors->has('eixo')) is-invalid @endif"
+                        >
                         @foreach ($eixos as $item)
-                            <option value="{{$item->id}}">
+                            <option value="{{$item->id}}" @if($item->id == $data->eixo_id) selected="true" @endif>
                                 {{ $item->nome }}
                             </option>
                         @endforeach
                     </select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col" >
-                <div class="form-floating mb-3">
-                    <select 
-                        class="form-select " 
-                        name="ativo">
-                        <option selected="true" disabled="false"></option>
-                        <option value="1" >
-                                Ativo
-                        </option>
-                        <option value="0" >
-                                Inativo
-                        </option>
-                    </select>
-                    <label for="ativo">Status</label>
+                    @if($errors->has('eixo'))
+                        <div class='invalid-feedback'>
+                            {{ $errors->first('eixo') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
