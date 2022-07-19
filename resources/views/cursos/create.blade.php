@@ -69,7 +69,6 @@
                     name="eixos"
                     class="form-select"
                 >
-                    <option selected="true" disabled="false"></option>
                     @foreach ($eixos as $item)
                         <option value="{{$item->id}}" >
                             {{ $item->nome }}
