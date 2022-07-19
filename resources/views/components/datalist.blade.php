@@ -1,5 +1,19 @@
 <div>
-    
+    @php 
+        foreach ($data as $key) {
+            if ($key->ativo == 1) {
+                $key->ativo = 'ATIVO';
+            }else if ($key->ativo == 0){
+                $key->ativo = 'INATIVO';}
+            if ($eixo!= null){
+                foreach($eixo as $k){
+                    if($key->eixo_id == $k->id){
+                        $key->eixo_id = $k->nome;
+                    }   
+                }   
+            }   
+        }     
+    @endphp
     <table class="table align-middle caption-top table-striped">
         <caption>Tabela de <b>{{ $title }}</b></caption>
         <thead>
