@@ -18,8 +18,8 @@ class Professor extends Migration
             $table->string('nome');
             $table->string('email');
             $table->integer('siape');
-            $table->unsignedBigInteger('eixo_id')
-                ->references('id')->on('eixos');
+            $table->unsignedBigInteger('eixo_id');
+            $table->foreign('eixo_id')->references('id')->on('eixos');
             $table->integer('ativo');
             $table->softDeletes();
             $table->timestamps();
