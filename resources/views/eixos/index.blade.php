@@ -10,7 +10,6 @@
             <tr>
                 <th scope="col" class="d-none d-md-table-cell">ID</th>
                 <th scope="col">NOME</th>
-                <th scope="col" class="d-none d-md-table-cell">DESCRIÇÃO</th>
                 <th scope="col">AÇÕES</th>
             </tr>
             </thead>
