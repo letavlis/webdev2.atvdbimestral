@@ -9,10 +9,12 @@
                 foreach($eixo as $k){
                     if($key->eixo_id == $k->id){
                         $key->eixo_id = $k->nome;
-                    }   
-                }   
-            }   
-        }     
+                    }elseif($key->curso_id == $k->id){
+                        $key->curso_id = $k->nome;
+                    }
+                }
+            }
+        } 
     @endphp
     <table class="table align-middle caption-top table-striped">
         <caption>Tabela de <b>{{ $title }}</b></caption>
