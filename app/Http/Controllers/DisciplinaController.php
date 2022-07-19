@@ -2,28 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disciplina;
+use App\Models\Curso;
 use Illuminate\Http\Request;
 
-class DisciplinaController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+class DisciplinaController extends Controller{
+    
+    public function index(){
+        $data = Disciplina::all();
+        $curso = Curso::all();
+        return view('disciplinas.index', compact('data', 'curso'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(){
+        $cursos = Curso::all();
+        return view('disciplinas.create',compact('cursos'));
     }
 
     /**
@@ -32,9 +25,28 @@ class DisciplinaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+
+        $regras =[
+            'nome' => 'required|max:100|min:10',
+            'carga'=> 'required|max:12|min:1'
+        ];
+
+        $msgs =[
+            "required" => "O preenchimento do campo [:attribute] é obrigatório!",
+            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+            "min" => "O campo [:attribute] possui tamanho mínimo de [:min] caracteres!",
+        ];
+        
+        $request->validate($regras, $msgs);
+        
+        Disciplina::create([
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
+            'carga' => $request->carga,
+            'curso_id' =>$request->cursos
+        ]);
+
+        return redirect()->route('disciplinas.index');
     }
 
     /**
