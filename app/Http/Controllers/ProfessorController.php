@@ -44,7 +44,7 @@ class ProfessorController extends Controller{
             'email' => $request->email,
             'siape' => $request->siape,
             'eixo_id' => $request->eixos,
-            'ativo' => 1
+            'ativo' => $request->ativo
         ]);
 
         return redirect()->route('professores.index');

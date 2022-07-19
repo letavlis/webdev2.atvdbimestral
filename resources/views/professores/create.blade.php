@@ -88,7 +88,6 @@
                     <select 
                         class="form-select " 
                         name="ativo">
-                        <option selected="true" disabled="false"></option>
                         <option value="1" >
                                 Ativo
                         </option>
