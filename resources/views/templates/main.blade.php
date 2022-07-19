@@ -121,7 +121,23 @@
         <span class="text-white fw-light"></span>
     </div>
 </nav>
-
+<div class="modal fade" tabindex="-1" id="infoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary">Mais Informações</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="infoModal" onclick="closeInfoModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-secondary">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-block align-content-center" onclick="closeInfoModal()">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" tabindex="-1" id="removeModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -151,6 +167,21 @@
 </div>
 
 <script type="text/javascript">
+
+    function showInfoModal(data, fields) {
+        data = JSON.parse(data)
+        fields = JSON.parse(fields)
+
+        $('#infoModal').modal().find('.modal-body').html(""); 
+        for(let a=0; a<fields.length; a++) {
+            $('#infoModal').modal().find('.modal-body').append("<b>" + data[fields[a]] + "</b><br>");
+        }
+        $("#infoModal").modal('show');
+    }
+
+    function closeInfoModal() {
+        $("#infoModal").modal('hide');
+    }
 
     $(document).ready(function(){
         $('.date').mask('00/00/0000');

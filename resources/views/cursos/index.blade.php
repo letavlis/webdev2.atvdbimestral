@@ -16,7 +16,7 @@
                 :data="$data"
                 :eixo="$eixo"
                 :hide="[true, false, true, false, true]" 
-                :info="['id', 'nome', 'email']"
+                :info="['id', 'nome', 'sigla']"
                 :remove="'nome'"
             />
         </div>
