@@ -60,37 +60,52 @@ class DisciplinaController extends Controller{
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+        
+        $data = Disciplina::find($id);
+        $cursos = Curso::all();
+        if(!isset($data)){return"<h1>ID: $id não encontrado!</h1>";}
+
+        return view('disciplinas.edit', compact('data', 'cursos'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
+        
+        $regras =[
+            'nome' => 'required|max:100|min:10',
+            'carga'=> 'required|max:12|min:1'
+        ];
+
+        $msgs =[
+            "required" => "O preenchimento do campo [:attribute] é obrigatório!",
+            "max" => "O campo [:attribute] possui tamanho máximo de [:max] caracteres!",
+            "min" => "O campo [:attribute] possui tamanho mínimo de [:min] caracteres!",
+        ];
+        
+        $request->validate($regras, $msgs);
+
+        $obj = Disciplina::find($id);
+        if(!isset($obj)){return"<h1>ID: $id não encontrado!</h1>";}
+        $obj->fill([
+            'nome' => mb_strtoupper($request->nome, 'UTF-8'),
+            'carga' => $request->carga,
+            'curso_id' =>$request->cursos
+        ]);
+        $obj->save();
+        return redirect()->route('disciplinas.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    
+    public function destroy($id){
+        $obj = Disciplina::find($id);
+        if(isset($obj)){
+            $obj->delete();
+        } else {
+            $msg = "Disciplina";
+            $link = "disciplinas.index";
+            return view('erros.id', compact(['msg', 'link']));
+        }
+        
+        return redirect()->route('disciplinas.index');
     }
 }
